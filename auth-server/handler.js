@@ -24,7 +24,7 @@ const credentials = {
 };
 
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
-const oAuth2Client = new OAuth2(
+const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
   redirect_uris[0]
@@ -91,7 +91,7 @@ module.exports.getAccessToken = async (event) => {
         statusCode: 200,
         headers: {
               "Access-Control-Allow-Origin": "*",
-          }, // might need to delete
+          }, 
         body: JSON.stringify(token),
       };
     })
@@ -138,7 +138,8 @@ module.exports.getCalendarEvents = async (event) => {
       return {
           statusCode: 200,
           headers: {
-              "Access-Control-Allow-Origin": "*",
+          mode:'no-cors',
+          "Access-Control-Allow-Origin": "*",
           },
           body: JSON.stringify({ events: results.data.items })
       };
@@ -147,6 +148,10 @@ module.exports.getCalendarEvents = async (event) => {
       console.error(err);
       return {
           statusCode: 500,
+          headers: {
+          mode:'no-cors',
+          "Access-Control-Allow-Origin": "*",
+          },
           body: JSON.stringify(err)
       };
   })
