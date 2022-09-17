@@ -27,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -54,5 +54,25 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "enzyme": "^3.11.0",
     "gh-pages": "^4.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js", 
+      "!src/hooks/*.js",
+      "!src/context/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "html",
+      "text"
+    ]
   }
 }
