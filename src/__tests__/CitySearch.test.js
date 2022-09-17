@@ -45,8 +45,21 @@ describe('<CitySearch /> component', () => {
   });
   expect(CitySearchWrapper.state("suggestions")).toEqual(filteredLocations);
   }); 
+    
+  test('render list of suggestions correctly', () => {
+    CitySearchWrapper.setState({ suggestions: locations });
+    const suggestions = CitySearchWrapper.state('suggestions');
+    expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(
+      suggestions.length + 1
+    );
+    for (let i = 0; i < suggestions.length; i++) {
+      expect(CitySearchWrapper.find('.suggestions li').at(i).text()).toBe(
+        suggestions[i]
+      );
+    }
+  });  
 
-  test("selecting a suggestion should change query state", () => {
+  test('selecting a suggestion should change query state', () => {
   CitySearchWrapper.setState({
     query: 'Berlin'  });
   const suggestions = CitySearchWrapper.state('suggestions');
