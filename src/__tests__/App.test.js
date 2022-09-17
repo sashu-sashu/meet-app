@@ -6,6 +6,7 @@ import CitySearch from '../CitySearch';
 
 describe('<App /> component', () => {
     let AppWrapper;
+    
   beforeAll(() => {
     AppWrapper = shallow(<App />);
   });
