@@ -54,7 +54,7 @@ export const getEvents = async () => {
   if (token) {
     removeQuery();
     const url =
-      'YOUR_GET_EVENTS_API_ENDPOINT' + //create
+      'https://bznsz7ay77.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
       '/' +
       token;
     const result = await axios.get(url);
