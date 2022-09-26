@@ -21,8 +21,8 @@ export class Event extends Component {
               <a
                 href={event.htmlLink}
                 target="_blank"
-                rel="noreferrer"
                 className="event-htmlLink"
+                rel="noopener noreferrer"
               >
                 Go to Google Calendar for more details
               </a>
