@@ -91,7 +91,13 @@ const getToken = async (code) => {
     const response = await fetch(
       'https://bznsz7ay77.execute-api.eu-central-1.amazonaws.com/dev/api/token' +
         '/' +
-        encodeCode
+        encodeCode,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          mode: 'no-cors',
+        },
+      }
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -99,7 +105,7 @@ const getToken = async (code) => {
     const { access_token } = await response.json();
     access_token && localStorage.setItem('access_token', access_token);
   } catch (error) {
-    error.json();
+    //error.json();
 
     console.table({ error });
   }
