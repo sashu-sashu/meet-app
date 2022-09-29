@@ -100,6 +100,8 @@ const getToken = async (code) => {
     access_token && localStorage.setItem('access_token', access_token);
   } catch (error) {
     error.json();
+
+    console.table({ error });
   }
 };
 
