@@ -5,6 +5,25 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import * as atatus from 'atatus-spa';
+import axios from 'axios';
+
+async function makeRequest() {
+  try {
+    const res = await axios.get('https://example.com/does-not-exist');
+    const data = res.data;
+    console.log(data);
+  } catch (err) {
+    if (err.response) {
+      // ✅ log status code here
+      console.log(err.response.status);
+      console.log(err.message);
+      console.log(err.response.headers); // 👉️ {... response headers here}
+      console.log(err.response.data); // 👉️ {... response data here}
+    }
+  }
+}
+
+makeRequest();
 
 atatus.config('453c234193ed4aef9791a646eacb48c9').install();
 
