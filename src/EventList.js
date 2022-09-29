@@ -8,15 +8,11 @@ export class EventList extends Component {
       <>
         {!events}
         <ul className="EventList">
-          {Array.isArray(events) ? (
-            events.map((event) => (
-              <li key={event.id}>
-                <Event event={event} />
-              </li>
-            ))
-          ) : (
-            <></>
-          )}
+          {events.map((event) => (
+            <li key={event.id}>
+              <Event event={event} />
+            </li>
+          ))}
         </ul>
       </>
     );
