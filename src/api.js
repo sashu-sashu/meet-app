@@ -69,8 +69,9 @@ export const getEvents = async () => {
 };
 
 const removeQuery = () => {
+  var newurl;
   if (window.history.pushState && window.location.pathname) {
-    var newurl =
+    newurl =
       window.location.protocol +
       '//' +
       window.location.host +
