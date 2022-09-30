@@ -54,6 +54,7 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "https://bznsz7ay77.execute-api.eu-central-1.amazonaws.com",
   "devDependencies": {
     "axios": "^0.27.2",
     "enzyme": "^3.11.0",
