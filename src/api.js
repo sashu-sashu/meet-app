@@ -21,7 +21,9 @@ export const getAccessToken = async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get('code');
     if (!code) {
-      const results = await axios.get('/dev/api/get-auth-url');
+      const results = await axios.get(
+        'https://bznsz7ay77.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url'
+      );
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
     }
@@ -51,7 +53,10 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = '/dev/api/get-events' + '/' + token;
+    const url =
+      'https://bznsz7ay77.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' +
+      '/' +
+      token;
     const result = await axios.get(url);
     if (result.data) {
       let locations = extractLocations(result.data.events);
@@ -83,12 +88,11 @@ const getToken = async (code) => {
   try {
     const encodeCode = encodeURIComponent(code);
 
-    const response = await fetch('/dev/api/token' + '/' + encodeCode, {
-      headers: {
-        'Content-Type': 'application/json',
-        mode: 'no-cors',
-      },
-    });
+    const response = await fetch(
+      'https://bznsz7ay77.execute-api.eu-central-1.amazonaws.com/dev/api/token' +
+        '/' +
+        encodeCode
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
