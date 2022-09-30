@@ -17,12 +17,11 @@ class App extends Component {
     });
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.mounted = false;
   }
 
-
-updateEvents = (location, eventCount) => {
+  updateEvents = (location, eventCount) => {
     if (location === undefined) {
       location = this.state.seletedLocation;
     }
@@ -31,13 +30,13 @@ updateEvents = (location, eventCount) => {
     }
     getEvents().then((events) => {
       const locationEvents =
-        (location === 'all') ?
-      events :
-      events.filter((event) => event.location === location);
+        location === 'all'
+          ? events
+          : events.filter((event) => event.location === location);
       this.setState({
-      events: locationEvents.slice(0, eventCount),
+        events: locationEvents.slice(0, eventCount),
         numberOfEvents: eventCount,
-        seletedLocation: location
+        seletedLocation: location,
       });
     });
   };
@@ -47,7 +46,7 @@ updateEvents = (location, eventCount) => {
     events: [],
     locations: [],
     numberOfEvents: 32,
-    seletedLocation: 'all'
+    seletedLocation: 'all',
   };
 
   render() {
@@ -66,6 +65,5 @@ updateEvents = (location, eventCount) => {
     );
   }
 }
-
 
 export default App;
