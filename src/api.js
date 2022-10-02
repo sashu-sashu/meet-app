@@ -32,7 +32,7 @@ export const getAccessToken = async () => {
   return accessToken;
 };
 
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
@@ -74,7 +74,7 @@ export const getEvents = async () => {
   }
 };
 
-const removeQuery = () => {
+export const removeQuery = () => {
   var newurl;
   if (window.history.pushState && window.location.pathname) {
     newurl =
@@ -90,7 +90,7 @@ const removeQuery = () => {
 };
 
 //getToken with try..catch statements
-const getToken = async (code) => {
+export const getToken = async (code) => {
   try {
     const encodeCode = encodeURIComponent(code);
 

@@ -37,6 +37,7 @@ export class WarningAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = 'orange';
+    this.class = 'warning-alert';
   }
 }
 

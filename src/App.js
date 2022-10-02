@@ -5,6 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
+import { WarningAlert } from './Alert';
 
 class App extends Component {
   componentDidMount() {
@@ -15,6 +16,15 @@ class App extends Component {
         this.setState({ events, locations });
       }
     });
+    if (!navigator.onLine) {
+      this.setState({
+        warningText: "Your're offline! The data was loaded from the cache.",
+      });
+    } else {
+      this.setState({
+        warningText: '',
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -47,11 +57,13 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     seletedLocation: 'all',
+    warningText: '',
   };
 
   render() {
     return (
       <div className="App">
+        <WarningAlert text={this.state.warningText}></WarningAlert>
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
