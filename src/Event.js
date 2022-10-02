@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-export class Event extends Component {
+class Event extends Component {
   toggleEventDetails = () => {
     this.setState({ show: !this.state.show });
   };
 
   state = { show: false };
+
   render() {
     const { event } = this.props;
     return (
@@ -17,14 +18,14 @@ export class Event extends Component {
           </p>
           {this.state.show && (
             <>
-              <h2 className="event-about-title">Event information:</h2>
+              <h2 className="event-about-title">About event:</h2>
               <a
                 href={event.htmlLink}
                 target="_blank"
+                rel="noreferrer"
                 className="event-htmlLink"
-                rel="noopener noreferrer"
               >
-                Go to Google Calendar for more details
+                See details on Google Calendar
               </a>
               <p className="event-description">{event.description}</p>
             </>
@@ -34,14 +35,14 @@ export class Event extends Component {
               className="event-showDetails-btn"
               onClick={this.toggleEventDetails}
             >
-              click to see details
+              Show Details
             </button>
           ) : (
             <button
               className="event-hideDetails-btn"
               onClick={this.toggleEventDetails}
             >
-              click to hide details
+              Hide Details
             </button>
           )}
         </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ErrorAlert } from './Alert';
 
-export class NumberOfEvents extends Component {
+class NumberOfEvents extends Component {
   handleInputChanged = (event) => {
     if (event.target.value < 1 || event.target.value > 32) {
       this.setState({
@@ -13,8 +13,10 @@ export class NumberOfEvents extends Component {
       const value = event.target.value;
       this.setState({ numOfEvents: value, errorText: '' });
     }
+    // this.props.updateEvents(undefined, event.target.value);
+    // const value = event.target.value;
+    // this.setState({ numOfEvents: value });
   };
-
   state = { numOfEvents: 32, errorText: '' };
   render() {
     return (
