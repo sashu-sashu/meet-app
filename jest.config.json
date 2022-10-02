@@ -1,0 +1,25 @@
+{
+  "testEnvironment": "node",
+  "testEnvironmentOptions": {
+    "NODE_ENV": "test"
+  },
+  "restoreMocks": true,
+  "coveragePathIgnorePatterns": [
+    "node_modules",
+    "index.js",
+    "index.jsx",
+    "server/src/config",
+    "server/src/app.js",
+    "src/index.jsx",
+    "src/reportWebVitals.js",
+    "tests"
+  ],
+  "coverageReporters": ["text", "lcov", "clover", "html"],
+  "testPathIgnorePatterns": [
+    "index.js",
+    "index.jsx",
+    "src/index.jsx",
+    "src/reportWebVitals.js"
+  ],
+  "roots": ["<rootDir>/server/tests"]
+}

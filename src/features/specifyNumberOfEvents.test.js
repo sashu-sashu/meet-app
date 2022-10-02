@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import App from '../App';
@@ -11,20 +10,20 @@ defineFeature(feature, (test) => {
     when,
     then,
   }) => {
-    given('the user searched for event search results for a city', () => {});
+    given(
+      'the user did not specified a number of events being shown',
+      () => {}
+    );
 
     let AppWrapper;
-    when('the user does not select a specific number of search results', () => {
+    when('app loaded', () => {
       AppWrapper = mount(<App />);
     });
 
-    then(
-      'the default number of search results for each city will be 32',
-      () => {
-        AppWrapper.update();
-        expect(AppWrapper.state('numberOfEvents')).toBe(32);
-      }
-    );
+    then('the user should see a default number which is 32', () => {
+      AppWrapper.update();
+      expect(AppWrapper.state('numberOfEvents')).toBe(32);
+    });
   });
 
   test('User can change the number of events they want to see.', ({
@@ -34,7 +33,7 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     let AppWrapper;
-    given('the user opened a search results query', () => {
+    given('the main page is open', () => {
       AppWrapper = mount(<App />);
     });
 
@@ -43,18 +42,21 @@ defineFeature(feature, (test) => {
       () => {}
     );
 
-    when('the user changes the default number of results', () => {
-      AppWrapper.update();
-      let NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
-      const eventObject = { target: { value: 8 } };
-      NumberOfEventsWrapper.find('.number-input').simulate(
-        'change',
-        eventObject
-      );
-    });
+    when(
+      'the user enters a number (for example six) in the number of events input field',
+      () => {
+        AppWrapper.update();
+        let NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
+        const eventObject = { target: { value: 6 } };
+        NumberOfEventsWrapper.find('.number-input').simulate(
+          'change',
+          eventObject
+        );
+      }
+    );
 
     then(
-      'the default number of results will be changed to whatever the user chooses',
+      'the user should see a six in the input field and user should only see a six events in the page',
       () => {
         expect(AppWrapper.state('numberOfEvents')).toBe(6);
       }
