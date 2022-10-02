@@ -1,15 +1,8 @@
-/**
- *
- * @param {*} events:
- * The following function should be in the “api.js” file.
- * This function takes an events array, then uses map to create a new array with only locations.
- * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
- * The Set will remove all duplicates from the array.
- */
-
 import { mockData } from './mock-data';
+
 import axios from 'axios';
 import NProgress from 'nprogress';
+import './nprogress.css';
 
 export const getAccessToken = async () => {
   const accessToken = localStorage.getItem('access_token');
@@ -32,13 +25,24 @@ export const getAccessToken = async () => {
   return accessToken;
 };
 
+// export const checkToken = async (accessToken) => {
+//   const result = await fetch(
+//     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+//   )
+//     .then((res) => res.json())
+//     .catch((error) => error.json());
+//   return result;
+// };
+
 export const checkToken = async (accessToken) => {
-  const result = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-  )
-    .then((res) => res.json())
-    .catch((error) => error.json());
-  return result;
+  try {
+    const result = await fetch(
+      `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    );
+    return await result.json();
+  } catch (error) {
+    error.json();
+  }
 };
 
 export const getEvents = async () => {
@@ -75,9 +79,8 @@ export const getEvents = async () => {
 };
 
 export const removeQuery = () => {
-  var newurl;
   if (window.history.pushState && window.location.pathname) {
-    newurl =
+    var newurl =
       window.location.protocol +
       '//' +
       window.location.host +
@@ -88,6 +91,23 @@ export const removeQuery = () => {
     window.history.pushState('', '', newurl);
   }
 };
+
+// const getToken = async (code) => {
+//   const encodeCode = encodeURIComponent(code);
+//   const { access_token } = await fetch(
+//     'https://bznsz7ay77.execute-api.eu-central-1.amazonaws.com/dev/api/token' +
+//       '/' +
+//       encodeCode
+//   )
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .catch((error) => error);
+
+//   access_token && localStorage.setItem('access_token', access_token);
+
+//   return access_token;
+// };
 
 //getToken with try..catch statements
 export const getToken = async (code) => {
@@ -105,14 +125,24 @@ export const getToken = async (code) => {
     const { access_token } = await response.json();
     access_token && localStorage.setItem('access_token', access_token);
   } catch (error) {
-    //error.json();
-
-    console.table({ error });
+    error.json();
   }
 };
 
+/**
+ *
+ * @param {*} events:
+ * This function takes an events array, then uses map to create a new array with only locations.
+ * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
+ * The Set will remove all duplicates from the array.
+ */
+
 export const extractLocations = (events) => {
-  if (events === undefined) return [];
-  const locations = events.map((event) => event.location);
-  return [...new Set(locations)];
+  let extractLocations = events.map((event) => event.location);
+  let locations = [...new Set(extractLocations)];
+  return locations;
 };
+
+// export const getEvents = async () => {
+//   return mockData;
+// };
