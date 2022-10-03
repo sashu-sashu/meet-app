@@ -63,18 +63,18 @@ describe('show/hide an event details', () => {
     browser.close();
   });
 
-  test.skip('An event element is collapsed by default', async () => {
+  test('An event element is collapsed by default', async () => {
     const eventDetails = await page.$('.event .event-description');
     expect(eventDetails).toBeNull();
   });
 
-  test.skip('User can expand an event to see its details', async () => {
+  test('User can expand an event to see its details', async () => {
     await page.click('.event .event-showDetails-btn');
     const eventDetails = await page.$('.event .event-description');
     expect(eventDetails).toBeDefined();
   });
 
-  test.skip('User can collapse an event to hide its details', async () => {
+  test('User can collapse an event to hide its details', async () => {
     await page.click('.event .event-hideDetails-btn');
     const eventDetails = await page.$('.event .event-description');
     expect(eventDetails).toBeNull();
