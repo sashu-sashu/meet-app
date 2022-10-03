@@ -4,7 +4,6 @@ describe('filter events by city', () => {
   let browser;
   let page;
   beforeAll(async () => {
-    gaa;
     jest.setTimeout(3000);
     // browser = await puppeteer.launch({
     //   headless: false,
